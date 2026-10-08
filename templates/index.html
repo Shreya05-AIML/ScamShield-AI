@@ -4,179 +4,861 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ScamShield AI | Cybersecurity Assistant</title>
+    <title>ScamShield AI | AI-Powered Cybersecurity & Digital Safety</title>
 
     <style>
-        * {
+        /* RESET & BASE */
+        *, *::before, *::after {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #eef2f7;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+            background: #f1f5f9;
             color: #1e293b;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* HEADER */
-        .header {
-            background: #0f172a;
-            color: white;
-            padding: 28px 20px;
+        /* HERO HEADER */
+        .hero {
+            background: linear-gradient(135deg, #0b132b 0%, #1c2541 50%, #0f172a 100%);
+            color: #ffffff;
+            padding: 48px 24px 40px;
             text-align: center;
+            border-bottom: 3px solid #2563eb;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .shield {
-            font-size: 45px;
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(37, 99, 235, 0.2);
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            color: #93c5fd;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
         }
 
-        .header h1 {
-            margin: 5px 0;
-            font-size: 34px;
+        .hero-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 8px;
         }
 
-        .header p {
-            margin: 8px 0 0;
+        .hero-shield {
+            font-size: 42px;
+            filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.5));
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 18px;
+            font-weight: 500;
+            color: #93c5fd;
+            margin-bottom: 12px;
+        }
+
+        .hero-desc {
+            max-width: 680px;
+            margin: 0 auto;
             color: #cbd5e1;
-            font-size: 16px;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
-        /* MAIN CARD */
+        /* MAIN CONTAINER */
         .container {
-            max-width: 900px;
-            margin: 40px auto;
+            max-width: 960px;
+            margin: -24px auto 48px;
             padding: 0 20px;
         }
 
         .card {
-            background: white;
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 36px 32px;
+            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
+            border: 1px solid #e2e8f0;
         }
 
-        .card h2 {
-            margin-top: 0;
-            font-size: 25px;
+        /* SECTION HEADINGS */
+        .section-header {
+            margin-bottom: 20px;
         }
 
-        .description {
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-desc {
             color: #64748b;
-            margin-bottom: 25px;
+            font-size: 14px;
+            margin-top: 4px;
         }
 
-        /* INPUT */
-        label {
-            font-weight: bold;
+        /* DEMO SAMPLES CHIPS */
+        .samples-panel {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-bottom: 28px;
+        }
+
+        .samples-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .samples-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .samples-hint {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .samples-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .sample-chip {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .sample-chip:hover {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.12);
+        }
+
+        .sample-chip:active {
+            transform: translateY(0);
+        }
+
+        /* INPUT AREA */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
             display: block;
-            margin-bottom: 10px;
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .textarea-wrapper {
+            position: relative;
         }
 
         textarea {
             width: 100%;
-            height: 170px;
+            height: 160px;
             padding: 16px;
             border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+            color: #1e293b;
+            background: #ffffff;
             resize: vertical;
             outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            line-height: 1.5;
         }
 
         textarea:focus {
             border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
         }
 
-        /* BUTTON */
-        button {
-            width: 100%;
-            margin-top: 18px;
-            padding: 15px;
-            border: none;
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        /* FORM ACTIONS */
+        .form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .btn-clear {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 14px 20px;
             border-radius: 10px;
-            background: #2563eb;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s;
         }
 
-        button:hover {
-            background: #1d4ed8;
+        .btn-clear:hover {
+            background: #e2e8f0;
+            color: #0f172a;
         }
 
-        /* RESULT */
-        .result {
-            margin-top: 30px;
-            padding: 25px;
-            border-radius: 12px;
-            background: #f8fafc;
+        .btn-submit {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+            transition: all 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* ERROR ALERT */
+        .alert-error {
+            margin-top: 20px;
+            padding: 14px 18px;
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+            border-left: 5px solid #dc2626;
+            border-radius: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* RESULTS CARD */
+        .result-container {
+            margin-top: 36px;
+            padding: 28px;
+            border-radius: 16px;
             border: 2px solid #e2e8f0;
+            background: #ffffff;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+            transition: all 0.3s ease;
         }
 
-        .result-title {
-            font-size: 22px;
-            margin-top: 0;
+        .result-high {
+            border-color: #fca5a5;
+            background: linear-gradient(to bottom, #fffdfd 0%, #ffffff 100%);
         }
 
-        .risk {
-            font-size: 25px;
-            font-weight: bold;
-            margin: 10px 0;
+        .result-medium {
+            border-color: #fcd34d;
+            background: linear-gradient(to bottom, #fffdf7 0%, #ffffff 100%);
         }
 
-        .score {
-            font-size: 18px;
+        .result-low {
+            border-color: #86efac;
+            background: linear-gradient(to bottom, #fafffb 0%, #ffffff 100%);
+        }
+
+        /* ENGINE STATUS BAR */
+        .engine-status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
             margin-bottom: 20px;
         }
 
-        .result ul {
-            padding-left: 25px;
+        .report-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .result li {
-            margin-bottom: 9px;
+        .badge-ai {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
+            color: #4338ca;
+            border: 1px solid #c7d2fe;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 2px 6px rgba(99, 102, 241, 0.12);
         }
 
-        .recommendation {
-            margin-top: 20px;
-            padding: 15px;
+        .badge-rule {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* RISK TIER & SCORE DISPLAY */
+        .risk-score-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .risk-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 22px;
+            font-weight: 800;
+            padding: 8px 20px;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .risk-high {
+            color: #b91c1c;
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+        }
+
+        .risk-medium {
+            color: #b45309;
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+        }
+
+        .risk-low {
+            color: #15803d;
+            background: #dcfce7;
+            border: 1px solid #86efac;
+        }
+
+        .score-metric {
+            text-align: right;
+        }
+
+        .score-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .score-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+
+        /* PROGRESS SCORE BAR */
+        .score-bar-bg {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 8px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .score-bar-high {
+            background: linear-gradient(90deg, #f87171, #dc2626);
+        }
+
+        .score-bar-medium {
+            background: linear-gradient(90deg, #fbbf24, #d97706);
+        }
+
+        .score-bar-low {
+            background: linear-gradient(90deg, #4ade80, #16a34a);
+        }
+
+        /* THREAT VECTOR CATEGORIES */
+        .category-box {
+            margin-bottom: 24px;
+        }
+
+        .category-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .category-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .category-badge {
+            background: #ede9fe;
+            color: #6d28d9;
+            border: 1px solid #ddd6fe;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* GEMINI AI SEMANTIC INTELLIGENCE CARD */
+        .ai-card {
+            margin-bottom: 24px;
+            padding: 22px;
+            background: linear-gradient(135deg, #fcfdff 0%, #f5f8ff 100%);
+            border: 1px solid #c7d2fe;
+            border-left: 5px solid #4f46e5;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.05);
+        }
+
+        .ai-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .ai-card-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #312e81;
+        }
+
+        .ai-card-text {
+            font-size: 15px;
+            color: #1e1b4b;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .ai-demands-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #991b1b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .ai-demands-list {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .ai-demands-list li {
+            font-size: 14px;
+            color: #7f1d1d;
+            margin-bottom: 4px;
+        }
+
+        /* WARNING SIGNS SECTION */
+        .warnings-box {
+            margin-bottom: 24px;
+            padding: 18px 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+        }
+
+        .box-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warnings-list {
+            padding-left: 22px;
+            margin: 0;
+        }
+
+        .warnings-list li {
+            font-size: 14px;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        /* PSYCHOLOGICAL TACTICS GRID */
+        .tactics-box {
+            margin-bottom: 24px;
+        }
+
+        .tactics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .tactic-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .tactic-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #dc2626;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .tactic-desc {
+            font-size: 13px;
+            color: #475569;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .tactic-triggers {
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* RECOMMENDED ACTION ADVISORY */
+        .advisory-box {
+            margin-bottom: 24px;
+            padding: 18px 20px;
             background: #eff6ff;
             border-left: 5px solid #2563eb;
-            border-radius: 6px;
+            border-radius: 10px;
         }
 
-        /* SAFETY TIP */
-        .safety {
-            margin-top: 25px;
-            padding: 18px;
+        .advisory-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 6px;
+        }
+
+        .advisory-text {
+            font-size: 14px;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        /* STRUCTURED ACTION CHECKLIST */
+        .checklist-box {
+            margin-bottom: 24px;
+            padding: 20px;
             background: #f0fdf4;
             border-left: 5px solid #16a34a;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
-        .safety strong {
+        .checklist-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #15803d;
+            margin-bottom: 10px;
+        }
+
+        .checklist-items {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .checklist-items li {
+            font-size: 14px;
             color: #166534;
+            margin-bottom: 6px;
+        }
+
+        /* INDIA CYBER-SAFETY HELPLINE CARD */
+        .helpline-box {
+            margin-top: 24px;
+            padding: 22px;
+            background: #fefce8;
+            border: 1px solid #fef08a;
+            border-left: 5px solid #ca8a04;
+            border-radius: 12px;
+        }
+
+        .helpline-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .helpline-flag {
+            font-size: 32px;
+        }
+
+        .helpline-main-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #854d0e;
+        }
+
+        .helpline-subtitle {
+            font-size: 13px;
+            color: #a16207;
+        }
+
+        .helpline-body {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid #fef08a;
+            margin-bottom: 14px;
+        }
+
+        .helpline-emergency {
+            font-size: 15px;
+            color: #1e293b;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .helpline-phone-pill {
+            background: #dc2626;
+            color: #ffffff;
+            padding: 4px 14px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .helpline-links-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .helpline-btn {
+            background: #f8fafc;
+            color: #0f172a;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #cbd5e1;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .helpline-btn:hover {
+            background: #e2e8f0;
+            border-color: #94a3b8;
+        }
+
+        .rbi-notice-box {
+            font-size: 13px;
+            color: #713f12;
+            background: #fef9c3;
+            padding: 10px 14px;
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+
+        /* SAFETY TIP CARD (DEFAULT) */
+        .safety-card {
+            margin-top: 32px;
+            padding: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .safety-icon {
+            font-size: 24px;
+        }
+
+        .safety-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2px;
+        }
+
+        .safety-text {
+            font-size: 13px;
+            color: #475569;
+            margin: 0;
+        }
+
+        /* DISCLAIMER CARD */
+        .disclaimer-card {
+            margin-top: 18px;
+            padding: 16px 20px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.5;
+            text-align: center;
         }
 
         /* FOOTER */
         footer {
             text-align: center;
-            padding: 25px;
+            padding: 32px 20px 48px;
             color: #64748b;
-            font-size: 14px;
+            font-size: 13px;
+            border-top: 1px solid #e2e8f0;
         }
 
-        /* MOBILE */
-        @media (max-width: 600px) {
+        .footer-tagline {
+            margin-top: 4px;
+            font-weight: 500;
+            color: #94a3b8;
+        }
 
-            .card {
-                padding: 22px;
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 36px 16px 32px;
             }
 
-            .header h1 {
-                font-size: 27px;
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero-tagline {
+                font-size: 16px;
+            }
+
+            .card {
+                padding: 24px 18px;
+            }
+
+            .result-container {
+                padding: 20px 16px;
+            }
+
+            .risk-score-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .score-metric {
+                text-align: left;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn-clear, .btn-submit {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .tactics-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -184,128 +866,310 @@
 
 <body>
 
-    <!-- HEADER -->
+    <!-- HERO HEADER -->
+    <header class="hero">
+        <div class="hero-badge">
+            🛡️ AI-Powered Cybersecurity & Digital Safety
+        </div>
 
-    <div class="header">
+        <div class="hero-brand">
+            <span class="hero-shield">🛡️</span>
+            <h1>ScamShield AI</h1>
+        </div>
 
-        <div class="shield">🛡️</div>
+        <div class="hero-tagline">
+            Intelligent Scam, Phishing & Social Engineering Detection
+        </div>
 
-        <h1>ScamShield AI</h1>
-
-        <p>
-            AI-Powered Scam & Phishing Detection
+        <p class="hero-desc">
+            Analyze suspicious SMS messages, WhatsApp chats, phishing emails, and deceptive links in real time. 
+            Powered by dual-layer intelligence combining semantic AI reasoning with deterministic threat heuristics.
         </p>
+    </header>
 
-    </div>
-
-
-    <!-- MAIN -->
-
-    <div class="container">
-
+    <!-- MAIN INTERACTION AREA -->
+    <main class="container">
         <div class="card">
 
-            <h2>🔍 Detect a Potential Scam</h2>
-
-            <p class="description">
-                Analyze suspicious SMS messages, emails, WhatsApp messages,
-                or URLs and identify potential security threats.
-            </p>
-
-
-            <form method="POST">
-
-                <label for="message">
-                    Enter suspicious message or URL
-                </label>
-
-                <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Example: Congratulations! You won ₹50,000. Click this link immediately..."
-                ></textarea>
-
-
-                <button type="submit">
-                    🔎 Analyze for Scam
-                </button>
-
-            </form>
-
-
-            <!-- RESULT -->
-
-            {% if result %}
-
-            <div class="result">
-
-                <h2 class="result-title">
-                    🛡️ Security Analysis
+            <!-- SECTION TITLE -->
+            <div class="section-header">
+                <h2 class="section-title">
+                    🔍 Threat Analysis Scanner
                 </h2>
-
-                <div class="risk">
-                    {{ result.risk }}
-                </div>
-
-                <div class="score">
-                    <strong>Risk Score:</strong>
-                    {{ result.score }}/100
-                </div>
-
-
-                <h3>⚠️ Warning Signs Detected</h3>
-
-                <ul>
-
-                    {% for warning in result.warnings %}
-
-                    <li>
-                        {{ warning }}
-                    </li>
-
-                    {% endfor %}
-
-                </ul>
-
-
-                <div class="recommendation">
-
-                    <strong>🛡️ Recommended Action</strong>
-
-                    <p>
-                        {{ result.recommendation }}
-                    </p>
-
-                </div>
-
+                <p class="section-desc">
+                    Paste a message, suspicious link, or request below to evaluate its risk score, deception tactics, and safety steps.
+                </p>
             </div>
 
+            <!-- ONE-CLICK DEMO SAMPLES -->
+            {% if demo_samples %}
+            <div class="samples-panel">
+                <div class="samples-header">
+                    <span class="samples-title">
+                        ⚡ Quick Demo Scenarios (Click to test instantly)
+                    </span>
+                    <span class="samples-hint">Preset examples for presentation</span>
+                </div>
+                <div class="samples-grid">
+                    {% for sample in demo_samples %}
+                    <button
+                        type="button"
+                        class="sample-chip"
+                        data-text="{{ sample.text }}"
+                        title="{{ sample.tag }}"
+                    >
+                        {{ sample.title }}
+                    </button>
+                    {% endfor %}
+                </div>
+            </div>
             {% endif %}
 
+            <!-- INPUT FORM -->
+            <form method="POST" id="scanForm">
+                <div class="input-group">
+                    <label for="message" class="input-label">
+                        Enter Suspicious Message, SMS, or URL
+                    </label>
+                    <div class="textarea-wrapper">
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Example: Dear customer, your SBI account is suspended due to pending KYC. Click http://bit.ly/update-kyc to submit OTP immediately..."
+                            required
+                        >{{ message if message else '' }}</textarea>
+                    </div>
+                </div>
 
-            <!-- SAFETY TIP -->
+                <div class="form-actions">
+                    <button type="button" class="btn-clear" id="btnClear">
+                        ✕ Clear Input
+                    </button>
+                    <button type="submit" class="btn-submit">
+                        🔎 Analyze Threat with AI
+                    </button>
+                </div>
+            </form>
 
-            <div class="safety">
+            <!-- VALIDATION ERROR -->
+            {% if error %}
+            <div class="alert-error">
+                ⚠️ {{ error }}
+            </div>
+            {% endif %}
 
-                <strong>💡 Safety Tip</strong>
+            <!-- RESULT REPORT -->
+            {% if result %}
+            <section class="result-container result-{{ result.risk_class }}" id="resultSection">
 
-                <p>
-                    Never share OTPs, passwords, PINs, CVV numbers,
-                    or banking details with unknown people or websites.
-                </p>
+                <!-- ENGINE STATUS HEADER -->
+                <div class="engine-status-bar">
+                    <div class="report-title">
+                        🛡️ Security Threat Report
+                    </div>
+                    {% if result.ai_active %}
+                    <span class="badge-ai" title="Analyzed with Google Gemini AI">
+                        ✨ Google Gemini AI Active
+                    </span>
+                    {% else %}
+                    <span class="badge-rule" title="Deterministic Rule Engine Active">
+                        🛡️ Rule-Based Heuristic Engine
+                    </span>
+                    {% endif %}
+                </div>
 
+                <!-- RISK LEVEL & SCORE METRICS -->
+                <div class="risk-score-row">
+                    <div class="risk-badge risk-{{ result.risk_class }}">
+                        {% if result.risk_class == 'high' %}🚨{% elif result.risk_class == 'medium' %}⚠️{% else %}✅{% endif %}
+                        {{ result.risk }}
+                    </div>
+
+                    <div class="score-metric">
+                        <div class="score-value">{{ result.score }} / 100</div>
+                        <div class="score-label">Threat Severity Score</div>
+                    </div>
+                </div>
+
+                <!-- ANIMATED SCORE PROGRESS METER -->
+                <div class="score-bar-bg">
+                    <div class="score-bar-fill score-bar-{{ result.risk_class }}" style="width: {{ result.score }}%;"></div>
+                </div>
+
+                <!-- DETECTED THREAT VECTOR CATEGORIES -->
+                {% if result.categories %}
+                <div class="category-box">
+                    <span class="category-label">🎯 Identified Threat Vectors:</span>
+                    <div class="category-badges">
+                        {% for cat in result.categories %}
+                        <span class="category-badge">🏷️ {{ cat }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- GEMINI AI SEMANTIC INTELLIGENCE CARD -->
+                {% if result.ai_explanation %}
+                <div class="ai-card">
+                    <div class="ai-card-header">
+                        <span style="font-size: 20px;">✨</span>
+                        <h3 class="ai-card-title">Gemini AI Semantic Intelligence</h3>
+                    </div>
+                    <p class="ai-card-text">
+                        {{ result.ai_explanation }}
+                    </p>
+
+                    {% if result.suspicious_requests %}
+                    <div>
+                        <span class="ai-demands-title">🚨 Suspicious Demands Identified:</span>
+                        <ul class="ai-demands-list">
+                            {% for req in result.suspicious_requests %}
+                            <li>{{ req }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- HEURISTIC WARNING SIGNS -->
+                <div class="warnings-box">
+                    <h4 class="box-title">
+                        ⚠️ Detected Red-Flag Indicators
+                    </h4>
+                    <ul class="warnings-list">
+                        {% for warning in result.warnings %}
+                        <li>{{ warning }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- PSYCHOLOGICAL MANIPULATION TACTICS -->
+                {% if result.tactics %}
+                <div class="tactics-box">
+                    <h4 class="box-title">
+                        🧠 Psychological Manipulation Tactics Detected
+                    </h4>
+                    <div class="tactics-grid">
+                        {% for tactic in result.tactics %}
+                        <div class="tactic-card">
+                            <span class="tactic-name">⚠️ {{ tactic.name }}</span>
+                            <p class="tactic-desc">{{ tactic.description }}</p>
+                            <span class="tactic-triggers">Signals: {{ tactic.matched | join(', ') }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- IMMEDIATE THREAT ADVISORY -->
+                <div class="advisory-box">
+                    <div class="advisory-title">🛡️ Threat Advisory</div>
+                    <p class="advisory-text">{{ result.recommendation }}</p>
+                </div>
+
+                <!-- STRUCTURED ACTION CHECKLIST -->
+                {% if result.action_steps %}
+                <div class="checklist-box">
+                    <div class="checklist-title">✅ Recommended Safety Protocol</div>
+                    <ul class="checklist-items">
+                        {% for step in result.action_steps %}
+                        <li>{{ step }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <!-- INDIA CYBER-SAFETY HELPLINE CARD -->
+                {% if result.india_reporting and result.risk_class in ['high', 'medium'] %}
+                <div class="helpline-box">
+                    <div class="helpline-header">
+                        <div class="helpline-flag">🇮🇳</div>
+                        <div>
+                            <div class="helpline-main-title">Official Cybercrime Emergency & Reporting Help</div>
+                            <div class="helpline-subtitle">{{ result.india_reporting.helpline_desc }}</div>
+                        </div>
+                    </div>
+
+                    <div class="helpline-body">
+                        <div class="helpline-emergency">
+                            <strong>Emergency Financial Cyber Fraud Helpline:</strong>
+                            <span class="helpline-phone-pill">📞 {{ result.india_reporting.helpline }}</span>
+                            <span style="font-size: 13px; color: #64748b;">(Toll-Free, 24x7 Citizen Assistance)</span>
+                        </div>
+                        <div class="helpline-links-group">
+                            <a href="{{ result.india_reporting.portal_url }}" target="_blank" rel="noopener noreferrer" class="helpline-btn">
+                                🌐 {{ result.india_reporting.portal_name }}
+                            </a>
+                            <a href="{{ result.india_reporting.chakshu_url }}" target="_blank" rel="noopener noreferrer" class="helpline-btn">
+                                📲 {{ result.india_reporting.chakshu_name }}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="rbi-notice-box">
+                        <strong>📌 RBI Regulatory Advisory:</strong> {{ result.india_reporting.rbi_advisory }}
+                    </div>
+                </div>
+                {% endif %}
+
+            </section>
+            {% endif %}
+
+            <!-- DEFAULT GENERAL SAFETY TIP -->
+            <div class="safety-card">
+                <div class="safety-icon">💡</div>
+                <div>
+                    <div class="safety-title">Golden Rule of Digital Safety</div>
+                    <p class="safety-text">
+                        Never share OTPs, netbanking passwords, ATM PINs, CVV codes, or UPI credentials. 
+                        Legitimate banks and government officials will never demand authentication codes via SMS, phone, or chat.
+                    </p>
+                </div>
+            </div>
+
+            <!-- EDUCATIONAL DISCLAIMER -->
+            <div class="disclaimer-card">
+                ⚖️ <strong>Educational Tool Disclaimer:</strong> ScamShield AI is an automated screening assistant designed for digital safety awareness and education. Always verify suspicious communications directly through verified official apps and channels before taking any action.
             </div>
 
         </div>
+    </main>
 
-    </div>
-
-
+    <!-- FOOTER -->
     <footer>
-
-        ScamShield AI © 2026 | Cybersecurity & Digital Safety
-
+        <p><strong>ScamShield AI</strong> &copy; 2026 | Build with AI Hackathon Project</p>
+        <p class="footer-tagline">AI-Powered Cybersecurity & Digital Safety Assistant</p>
     </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // One-Click Demo Sample Chips
+        document.querySelectorAll('.sample-chip').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var messageArea = document.getElementById('message');
+                messageArea.value = this.getAttribute('data-text');
+                messageArea.focus();
+                messageArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+
+        // Clear Input Button
+        var btnClear = document.getElementById('btnClear');
+        if (btnClear) {
+            btnClear.addEventListener('click', function() {
+                var messageArea = document.getElementById('message');
+                messageArea.value = '';
+                messageArea.focus();
+            });
+        }
+
+        // Auto-scroll to results if present
+        var resultSection = document.getElementById('resultSection');
+        if (resultSection) {
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
 
 </body>
 
